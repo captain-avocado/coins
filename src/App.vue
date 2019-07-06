@@ -1,29 +1,60 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+<template lang="pug">
+  #app.app
+    Header.app__header(:class="scrolled > 0 ? 'active' : ''")
+    .app__container
+      Table.app__content
 </template>
+<script>
+import "@/assets/sass/main.scss";
+import Header from "@/components/Header.vue";
+import Table from "@/components/Table.vue";
 
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: {
+    Header,
+    Table
+  },
+  data() {
+    return {
+      scrolled: false
+    };
+  },
+  methods: {
+    handleScroll() {
+      this.scrolled = window.scrollY;
     }
+  },
+  beforeMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+};
+</script>
+<style lang="scss">
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    height: $header-height;
+  }
+
+  &__container {
+    flex: 1;
+    background: linear-gradient(to right, rgb(63, 81, 181), rgb(100, 181, 246))
+      rgb(255, 255, 255);
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    height: calc(100% - #{$header-height});
+    // over
+  }
+
+  &__content {
+    @include container;
   }
 }
 </style>

@@ -1,0 +1,11 @@
+body {
+  font-family: 'Lato';
+  font-size: 14px;
+}
+
+.mobile {
+  display: none !important;
+  @include tablets {
+    display: flex !important;
+  }
+}

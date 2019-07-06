@@ -1,0 +1,53 @@
+@mixin wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@mixin container {
+  width: 90%;
+  max-width: 1220px;
+}
+
+@mixin underscore-effect($color) {
+  position: relative;
+
+  &:after {
+    content: '';
+    height: 1px;
+    width: 0;
+    transition: width .4s;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $color;
+  }
+
+  &:hover:after {
+    width: 100%;
+  }
+}
+
+@mixin laptops {
+  @media (max-width: 1180px) {
+    @content;
+  }
+}
+
+@mixin tablets {
+  @media (max-width: 800px) {
+    @content;
+  }
+}
+
+@mixin phones {
+  @media (max-width: 450px) {
+    @content;
+  }
+}
+
+@mixin phones-small {
+  @media (max-width: 320px) {
+    @content;
+  }
+}
