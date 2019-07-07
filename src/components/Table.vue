@@ -1,20 +1,21 @@
 <template lang="pug">
+.wrap
   table.table
     thead.table__head
       tr.table__row
-        td.table__cell Rank
-        td.table__cell Name
-        td.table__cell Price
-        td.table__cell Market Cap
-        td.table__cell Volume (24Hr)
+        td.table__cell.table__cell--head.table__cell--center-aligned Rank
+        td.table__cell.table__cell--head.table__cell--left-aligned Name
+        td.table__cell.table__cell--head.table__cell--right-aligned Price
+        td.table__cell.table__cell--head.table__cell--right-aligned Market Cap
+        td.table__cell.table__cell--head.table__cell--right-aligned Volume (24Hr)
     tbody
       template(v-for="coin in coins")
-        tr
-          td {{coin.rank}}
-          td {{coin.name}}
-          td {{moneyConvert(coin.priceUsd)}}
-          td {{coin.marketCapUsd}}
-          td {{coin.volumeUsd24Hr}}
+        tr.table__row
+          td.table__cell.table__cell--center-aligned {{coin.rank}}
+          td.table__cell.table__cell--left-aligned {{coin.name}}
+          td.table__cell.table__cell--right-aligned {{coin.priceUsd}}
+          td.table__cell.table__cell--right-aligned {{coin.marketCapUsd}}
+          td.table__cell.table__cell--right-aligned {{coin.volumeUsd24Hr}}
 </template>
 
 <script>
@@ -77,13 +78,50 @@ export default {
 
 
 <style lang="scss" scoped>
+.wrap {
+  height: 100%;
+
+  overflow-y: hidden;
+  &:hover {
+    overflow-y: auto;
+  }
+}
+
 .table {
+  width: 100%;
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 15px -3px;
   background: #fff;
   border-radius: 5px;
+  border-spacing: 0;
 
   &__cell {
-    padding: 5px;
+    padding: 12px;
+    border-bottom: 1px solid rgba(34, 36, 38, 0.15);
+
+    &--head {
+      padding: 15px 12px;
+      color: rgba(0, 0, 0, 0.7);
+      font-weight: 700;
+    }
+
+    &--left-aligned {
+      text-align: left;
+    }
+
+    &--center-aligned {
+      text-align: center;
+    }
+
+    &--right-aligned {
+      text-align: right;
+    }
+  }
+
+  &__row {
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
 }
 </style>
